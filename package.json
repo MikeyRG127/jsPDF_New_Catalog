@@ -1,0 +1,19 @@
+{
+  "name": "jspdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "http-server": "^14.1.1",
+    "playwright": "^1.35.1",
+    "queue-typescript": "^1.0.1"
+  }
+}
