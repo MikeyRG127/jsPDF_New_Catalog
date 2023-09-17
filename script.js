@@ -20,7 +20,14 @@ buttonprint.addEventListener("click", () => {
 export function generateV2() {
 
     window.jsPDF = window.jspdf.jsPDF;
-    var doc = new jsPDF();
+    //var doc = new jsPDF();
+    var doc = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'letter',
+        putOnlyUsedFonts: true
+    });
+
     //var { TextField } = jsPDF.AcroForm;
     //var textField = new TextField();
 
@@ -28,7 +35,7 @@ export function generateV2() {
     var inputElement = document.getElementById('jsonInput');
     var inputValue = inputElement.value;
     var consolidados = JSON.parse(inputValue);
-    var itemsPerPage = 11;
+    var itemsPerPage = 12;
     var currentPage = 0;
     var AcroFormPosition = 0;
 
@@ -56,217 +63,52 @@ export function generateV2() {
             currentPage++;
 
             /*
-            //Blue Rectangule
+            //RULE LEFT
             doc.setDrawColor(0);
             doc.setFillColor(0, 152, 217);
-            doc.rect(135, 0, 60, 5, "F");
+            doc.rect(9.5, 0, 0.1, 300, "F");
 
-            //Blue Rules
+            //RULE RIGHT
             doc.setDrawColor(0);
             doc.setFillColor(0, 152, 217);
-            doc.rect(15, 0, 0.1, 300, "F");
+            doc.rect(193.7, 0, 0.1, 300, "F");
 
-            doc.setDrawColor(0);
-            doc.setFillColor(0, 152, 217);
-            doc.rect(195, 0, 0.1, 300, "F");
 
+            //RULE TOP
             doc.setDrawColor(0);
             doc.setFillColor(0, 152, 217);
-            doc.rect(0, 15, 300, 0.1, "F");
+            doc.rect(0, 12.7, 300, 0.1, "F");
             */
-            //Logo
-            doc.setTextColor(65, 64, 66);
-            doc.setFontSize(15);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("ALYSAR", 15, 19);
-
-            doc.setTextColor(0, 152, 217);
-            doc.setFontSize(15);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("INTERNACIONAL, S.A.", 15, 24);
-
-
-            doc.setTextColor(65, 64, 66);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text(addNewLines("Zona Libre de Colón - Colón, Rep de Panamá", 30), 15, 29);
-
-
-
-            doc.setTextColor(65, 64, 66);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("(507) 447-1841 y 447-1842", 15, 37);
-
-
-            doc.setTextColor(65, 64, 66);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("raed@alysarzl.com", 15, 41);
-
-
-            //Recibo
-            doc.setTextColor(0, 152, 217);
-            doc.setFontSize(25);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("PEDIDO", 161, 48);
-
-
-
-
-            //Large Line
-            doc.setDrawColor(0);
-            doc.setFillColor(0, 152, 217);
-            doc.rect(15, 50, 120, 0.2, "F");
-
-
-            //Short Line
-            doc.setDrawColor(0);
-            doc.setFillColor(0, 152, 217);
-            doc.rect(135, 50, 60, 1, "F");
-
-
-            //CLIENTE
-            doc.setTextColor(0, 152, 217);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("CLIENTE:", 15, 58);
-
-            //CLIENTE details
-            doc.setTextColor(65, 64, 66);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("LYNX SHIPPING", 45, 58);
-
-            //DIRECCION
-            doc.setTextColor(0, 152, 217);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("DIRECCIÓN:", 15, 63);
-
-            //DIRECCION details
-            doc.setTextColor(65, 64, 66);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', OutfitRegular);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("MANAGUA NICARAGUA", 45, 63);
-
-
-            //CONSIGNADO
-            doc.setTextColor(0, 152, 217);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("EMAIL:", 15, 68);
-
-            //CONSIGNADO details
-            doc.setTextColor(65, 64, 66);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', OutfitRegular);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("LOS MISMOS", 45, 68);
-
-            //DIRECCION
-            doc.setTextColor(0, 152, 217);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("FECHA:", 15, 73);
-
-            //DIRECCION details
-            doc.setTextColor(65, 64, 66);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', OutfitRegular);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("N/A", 45, 73);
 
 
 
             doc.setDrawColor(0);
-            doc.setFillColor(0, 152, 217);
-            doc.rect(15, 80, 27, 7, "F");
-            doc.setTextColor(250, 250, 250);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', OutfitRegular);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("IMAGEN", 17, 84.5);
+            doc.setFillColor(235, 235, 235);
+            doc.rect(69.8, 12.7, 0.2, 244.4, "F");
 
             doc.setDrawColor(0);
-            doc.setFillColor(0, 152, 217);
-            doc.rect(43, 80, 70, 7, "F");
-            doc.setTextColor(250, 250, 250);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', OutfitRegular);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("DESCRIPCION", 45, 84.5);
+            doc.setFillColor(235, 235, 235);
+            doc.rect(133.3, 12.7, 0.2, 244.4, "F");
+
 
 
             doc.setDrawColor(0);
-            doc.setFillColor(0, 152, 217);
-            doc.rect(114, 80, 20, 7, "F");
-            doc.setTextColor(250, 250, 250);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', OutfitRegular);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("CANTIDAD", 116, 84.5);
+            doc.setFillColor(235, 235, 235);
+            doc.rect(12.7, 72.9, 177.8, 0.2, "F");
 
 
             doc.setDrawColor(0);
-            doc.setFillColor(0, 152, 217);
-            doc.rect(135, 80, 20, 7, "F");
-            doc.setTextColor(250, 250, 250);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', OutfitRegular);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("PRECIO", 137, 84.5);
+            doc.setFillColor(235, 235, 235);
+            doc.rect(12.7, 135.4, 177.8, 0.2, "F");
 
 
             doc.setDrawColor(0);
-            doc.setFillColor(0, 152, 217);
-            doc.rect(156, 80, 20, 7, "F");
-            doc.setTextColor(250, 250, 250);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', OutfitRegular);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("UNIDAD", 158, 84.5);
+            doc.setFillColor(235, 235, 235);
+            doc.rect(12.7, 200, 177.8, 0.2, "F");
 
             doc.setDrawColor(0);
-            doc.setFillColor(0, 152, 217);
-            doc.rect(177, 80, 18, 7, "F");
-            doc.setTextColor(250, 250, 250);
-            doc.setFontSize(8);
-            doc.addFileToVFS('HelveticaBold-normal.ttf', OutfitRegular);
-            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-            doc.setFont("HelveticaBold", "normal");
-            doc.text("TOTAL", 179, 84.5);
+            doc.setFillColor(235, 235, 235);
+            doc.rect(12.7, 266.5, 177.8, 0.2, "F");
 
 
         }
@@ -274,683 +116,347 @@ export function generateV2() {
 
 
         switch (AcroFormPosition) {
+
             case 0:
+
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(15, 88, 27, 18, "F");
+                doc.setFillColor(235, 235, 235);
+                doc.rect(9.4, 12.7, 57.2, 41.3, "F");
+                doc.setDrawColor(0);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(44.45, 60.3, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 9.4, 57.6);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 9.4, 66.2);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 9.4, 70.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(8);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
                 doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
                 doc.setFont("HelveticaBold", "normal");
-                doc.text("BULTOS", 17, 98);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(43, 88, 70, 18, "F");
-                doc.setTextColor(250, 250, 250);
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("DESCRIPCION", 45, 98);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(114, 88, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text(("CANTIDAD"), 116, 98);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(135, 88, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("PRECIO", 137, 98);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(156, 88, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("UNIDAD", 158, 98);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(177, 88, 18, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("TOTAL", 179, 98);
-
-
+                doc.text(addNewLines("$" + "95.00", 15), 20, 70.5);
                 AcroFormPosition++;
                 break;
 
             case 1:
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(15, 107, 27, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("BULTOS", 17, 117);
-
+                doc.setFillColor(235, 235, 235);
+                doc.rect(73, 12.7, 57.2, 41.3, "F");
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(43, 107, 70, 18, "F");
-                doc.setTextColor(250, 250, 250);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(108, 60.3, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 73, 57.6)
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 73, 66.2);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 73, 70.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(8);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
                 doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
                 doc.setFont("HelveticaBold", "normal");
-                doc.text("DESCRIPCION", 45, 117);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(114, 107, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text(("CANTIDAD"), 116, 117);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(135, 107, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("PRECIO", 137, 117);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(156, 107, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("UNIDAD", 158, 117);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(177, 107, 18, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("TOTAL", 179, 117);
-
-
+                doc.text(addNewLines("$" + "95.00", 15), 83.5, 70.5);
 
                 AcroFormPosition++;
                 break;
 
             case 2:
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(15, 126, 27, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("BULTOS", 17, 136);
-
+                doc.setFillColor(235, 235, 235);
+                doc.rect(136.5, 12.7, 57.2, 41.3, "F");
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(43, 126, 70, 18, "F");
-                doc.setTextColor(250, 250, 250);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(171.5, 60.3, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 136.5, 57.6);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 136.5, 66.2);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 136.5, 70.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(8);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
                 doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
                 doc.setFont("HelveticaBold", "normal");
-                doc.text("DESCRIPCION", 45, 136);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(114, 126, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text(("CANTIDAD"), 116, 136);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(135, 126, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("PRECIO", 137, 136);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(156, 126, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("UNIDAD", 158, 136);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(177, 126, 18, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("TOTAL", 179, 136);
-
-
+                doc.text(addNewLines("$" + "95.00", 15), 147.1, 70.5);
                 AcroFormPosition++;
                 break;
 
             case 3:
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(15, 145, 27, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("BULTOS", 17, 155);
-
+                doc.setFillColor(235, 235, 235);
+                doc.rect(9.4, 76.2, 57.2, 41.3, "F");
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(43, 145, 70, 18, "F");
-                doc.setTextColor(250, 250, 250);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(44.45, 123.8, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 9.4, 121.7);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 9.4, 129.8);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 9.4, 134);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(8);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
                 doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
                 doc.setFont("HelveticaBold", "normal");
-                doc.text("DESCRIPCION", 45, 155);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(114, 145, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text(("CANTIDAD"), 116, 155);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(135, 145, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("PRECIO", 137, 155);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(156, 145, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("UNIDAD", 158, 155);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(177, 145, 18, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("TOTAL", 179, 155);
-
-
+                doc.text(addNewLines("$" + "95.00", 15), 20, 134);
                 AcroFormPosition++;
                 break;
 
             case 4:
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(15, 164, 27, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("BULTOS", 17, 174);
-
+                doc.setFillColor(235, 235, 235);
+                doc.rect(73, 76.2, 57.2, 41.3, "F");
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(43, 164, 70, 18, "F");
-                doc.setTextColor(250, 250, 250);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(108, 123.8, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 73, 121.7)
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 73, 129.8);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 73, 134);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(8);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
                 doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
                 doc.setFont("HelveticaBold", "normal");
-                doc.text("DESCRIPCION", 45, 174);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(114, 164, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text(("CANTIDAD"), 116, 174);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(135, 164, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("PRECIO", 137, 174);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(156, 164, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("UNIDAD", 158, 174);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(177, 164, 18, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("TOTAL", 179, 174);
-
-
+                doc.text(addNewLines("$" + "95.00", 15), 83.5, 134);
                 AcroFormPosition++;
                 break;
 
             case 5:
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(15, 183, 27, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("BULTOS", 17, 193);
-
+                doc.setFillColor(235, 235, 235);
+                doc.rect(136.5, 76.2, 57.2, 41.3, "F");
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(43, 183, 70, 18, "F");
-                doc.setTextColor(250, 250, 250);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(171.5, 123.8, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 136.5, 121.7);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 136.5, 129.8);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 136.5, 134);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(8);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
                 doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
                 doc.setFont("HelveticaBold", "normal");
-                doc.text("DESCRIPCION", 45, 193);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(114, 183, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text(("CANTIDAD"), 116, 193);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(135, 183, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("PRECIO", 137, 193);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(156, 183, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("UNIDAD", 158, 193);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(177, 183, 18, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("TOTAL", 179, 193);
-
-
+                doc.text(addNewLines("$" + "95.00", 15), 147.1, 134);
                 AcroFormPosition++;
                 break;
 
             case 6:
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(15, 202, 27, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("BULTOS", 17, 212);
-
+                doc.setFillColor(235, 235, 235);
+                doc.rect(9.4, 137.7, 57.2, 41.3, "F");
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(43, 202, 70, 18, "F");
-                doc.setTextColor(250, 250, 250);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(44.45, 187.3, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 9.4, 184.6);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 9.4, 193.3);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 9.4, 197.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(8);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
                 doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
                 doc.setFont("HelveticaBold", "normal");
-                doc.text("DESCRIPCION", 45, 212);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(114, 202, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text(("CANTIDAD"), 116, 212);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(135, 202, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("PRECIO", 137, 212);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(156, 202, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("UNIDAD", 158, 212);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(177, 202, 18, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("TOTAL", 179, 212);
-
-
+                doc.text(addNewLines("$" + "95.00", 15), 20, 197.5);
                 AcroFormPosition++;
                 break;
 
             case 7:
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(15, 221, 27, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("BULTOS", 17, 231);
-
+                doc.setFillColor(235, 235, 235);
+                doc.rect(73, 137.7, 57.2, 41.3, "F");
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(43, 221, 70, 18, "F");
-                doc.setTextColor(250, 250, 250);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(108, 187.3, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 73, 184.6)
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 73, 193.3);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 73, 197.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(8);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
                 doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
                 doc.setFont("HelveticaBold", "normal");
-                doc.text("DESCRIPCION", 45, 231);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(114, 221, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text(("CANTIDAD"), 116, 231);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(135, 221, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("PRECIO", 137, 231);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(156, 221, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("UNIDAD", 158, 231);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(177, 221, 18, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("TOTAL", 179, 231);
-
-
+                doc.text(addNewLines("$" + "95.00", 15), 83.5, 197.5);
                 AcroFormPosition++;
                 break;
 
             case 8:
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(15, 240, 27, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("BULTOS", 17, 250);
-
+                doc.setFillColor(235, 235, 235);
+                doc.rect(136.5, 137.7, 57.2, 41.3, "F");
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(43, 240, 70, 18, "F");
-                doc.setTextColor(250, 250, 250);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(171.5, 187.3, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 136.5, 184.6);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 136.5, 193.3);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 136.5, 197.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(8);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
                 doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
                 doc.setFont("HelveticaBold", "normal");
-                doc.text("DESCRIPCION", 45, 250);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(114, 240, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text(("CANTIDAD"), 116, 250);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(135, 240, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("PRECIO", 137, 250);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(156, 240, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("UNIDAD", 158, 250);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(177, 240, 18, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("TOTAL", 179, 250);
-
-
+                doc.text(addNewLines("$" + "95.00", 15), 147.1, 197.5);
                 AcroFormPosition++;
                 break;
 
 
             case 9:
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(15, 259, 27, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("BULTOS", 17, 269);
-
+                doc.setFillColor(235, 235, 235);
+                doc.rect(9.4, 203.2, 57.2, 41.3, "F");
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(43, 259, 70, 18, "F");
-                doc.setTextColor(250, 250, 250);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(44.45, 250.8, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 9.4, 248.1);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 9.4, 256.8);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 9.4, 261);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(8);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
                 doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
                 doc.setFont("HelveticaBold", "normal");
-                doc.text("DESCRIPCION", 45, 269);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(114, 259, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text(("CANTIDAD"), 116, 269);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(135, 259, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("PRECIO", 137, 269);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(156, 259, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("UNIDAD", 158, 269);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(177, 259, 18, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("TOTAL", 179, 269);
+                doc.text(addNewLines("$" + "95.00", 15), 20, 261);
 
 
                 AcroFormPosition++;
@@ -958,118 +464,100 @@ export function generateV2() {
 
             case 10:
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(15, 278, 27, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("BULTOS", 17, 288);
-
+                doc.setFillColor(235, 235, 235);
+                doc.rect(73, 203.2, 57.2, 41.3, "F");
                 doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(43, 278, 70, 18, "F");
-                doc.setTextColor(250, 250, 250);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(108, 250.8, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 73, 248.1)
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 73, 256.8);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 73, 261);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(8);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
                 doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
                 doc.setFont("HelveticaBold", "normal");
-                doc.text("DESCRIPCION", 45, 288);
+                doc.text(addNewLines("$" + "95.00", 15), 83.5, 261);
 
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(114, 278, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text(("CANTIDAD"), 116, 288);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(135, 278, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("PRECIO", 137, 288);
-
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(156, 278, 20, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("UNIDAD", 158, 288);
-
-                doc.setDrawColor(0);
-                doc.setFillColor(237, 237, 240);
-                doc.rect(177, 278, 18, 18, "F");
-                doc.setTextColor(0, 0, 0);
-                doc.setFontSize(8);
-                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-                doc.setFont("HelveticaBold", "normal");
-                doc.text("TOTAL", 179, 288);
-
-
-                AcroFormPosition = 0;
+                AcroFormPosition++;
                 break;
 
-
-
-
+            case 11:
+                doc.setDrawColor(0);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(136.5, 203.2, 57.2, 41.3, "F");
+                doc.setDrawColor(0);
+                doc.setFillColor(235, 235, 235);
+                doc.rect(171.5, 250.8, 22.3, 9.5, "F");
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(10);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Rapunzel Seamfrae", 15), 136.5, 248.1);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("6x500gr", 15), 136.5, 256.8);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', Squ721Rm);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("Price:", 15), 136.5, 261);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(8);
+                doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+                doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+                doc.setFont("HelveticaBold", "normal");
+                doc.text(addNewLines("$" + "95.00", 15), 147.1, 261);
+                AcroFormPosition = 0;
+                break;
 
         }
 
 
         if (i % itemsPerPage === 0) {
 
+            doc.setDrawColor(0);
+            doc.setFillColor(31, 87, 162);
+            doc.rect(200.1, 0, 15.8, 279.4, "F");
 
-            /* doc.setTextColor(0, 0, 0);
-             doc.setFontSize(12);
-             doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-             doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-             doc.setFont("HelveticaBold", "normal");
-             doc.text("TOTAL: " + "1,224 " + "BTS", 15, 278);
- 
- 
-             doc.setTextColor(0, 0, 0);
-             doc.setFontSize(12);
-             doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-             doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-             doc.setFont("HelveticaBold", "normal");
-             doc.text("20,980.43 KG", 15, 283);
- 
- 
- 
- 
-             doc.setTextColor(0, 0, 0);
-             doc.setFontSize(15);
-             doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-             doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-             doc.setFont("HelveticaBold", "normal");
-             doc.text("TOTAL: $27,060.08", 125, 281);
- 
- 
-             doc.setDrawColor(0);
-             doc.setFillColor(0, 152, 217);
-             doc.rect(15, 285, 181, 8,);
-             doc.setTextColor(240, 49, 23);
-             doc.setFontSize(10);
-             doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
-             doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
-             doc.setFont("HelveticaBold", "normal");
-             doc.text("NOTA: TODA MERCANCÍA VIAJA POR CUENTA Y RIESGO DEL COMPRADOR.", 20, 290);
-             */
+            doc.setTextColor(250, 250, 250);
+            doc.setFontSize(12);
+            doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+            doc.setFont("HelveticaBold", "normal");
+            doc.text("COLLECTION NAME 2019", 207, 12.5, null, -90);
+
+
+
+
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(12);
+            doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
+            doc.addFont('HelveticaBold-normal.ttf', 'HelveticaBold', 'normal');
+            doc.setFont("HelveticaBold", "normal");
+            doc.text("YOUR COMPANY NAME" + "   |   " + "11 E Commerce Ave, High Point, NC, United States", 12.7, 272);
+
+
         }
 
     }
