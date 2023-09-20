@@ -39,6 +39,8 @@ export function generateV2() {
     var currentPage = 0;
     var AcroFormPosition = 0;
 
+
+
     function addNewLines(string, numberofcharacters) {
         var result = '';
         for (var i = 0; i < string.length; i++) {
@@ -49,10 +51,12 @@ export function generateV2() {
         }
         return result;
     }
+
+
     for (var i = 0; i < consolidados.length; i++) {
 
         var imageIndex = i;
-        var consolidado = consolidados[i];
+        var consolidado = consolidados[i].Arancel;
 
         //PDF TEMPLATE
         if (i % itemsPerPage === 0) {
@@ -79,6 +83,7 @@ export function generateV2() {
             doc.setFillColor(0, 152, 217);
             doc.rect(0, 12.7, 300, 0.1, "F");
             */
+
 
 
 
@@ -112,9 +117,10 @@ export function generateV2() {
 
 
         }
-        //PDF TEMPLATE END
-
-
+        //PDF TEMPLATE END 
+        JsBarcode("#itf", consolidado, { format: "itf" });
+        const img = document.querySelector('img#itf');
+        console.log(consolidado);
         switch (AcroFormPosition) {
 
             case 0:
@@ -125,6 +131,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(44.45, 60.3, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 44.45, 60.3, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
@@ -159,6 +166,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(108, 60.3, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 108, 60.3, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
@@ -194,6 +202,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(171.5, 60.3, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 171.5, 60.3, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
@@ -228,6 +237,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(44.45, 123.8, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 44.45, 123.8, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
@@ -262,6 +272,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(108, 123.8, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 108, 123.8, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
@@ -296,6 +307,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(171.5, 123.8, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 171.5, 123.8, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
@@ -330,6 +342,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(44.45, 187.3, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 44.45, 187.3, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
@@ -364,6 +377,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(108, 187.3, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 108, 187.3, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
@@ -398,6 +412,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(171.5, 187.3, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 171.5, 187.3, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
@@ -433,6 +448,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(44.45, 250.8, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 44.45, 250.8, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
@@ -469,6 +485,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(108, 250.8, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 108, 250.8, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
@@ -504,6 +521,7 @@ export function generateV2() {
                 doc.setDrawColor(0);
                 doc.setFillColor(235, 235, 235);
                 doc.rect(171.5, 250.8, 22.3, 9.5, "F");
+                doc.addImage(img.src, 'JPEG', 171.5, 250.8, 22.3, 9.5);
                 doc.setTextColor(0, 0, 0);
                 doc.setFontSize(10);
                 doc.addFileToVFS('HelveticaBold-normal.ttf', HelveticaBold);
